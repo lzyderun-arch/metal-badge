@@ -285,38 +285,28 @@ section {
 }
 
 .product-card {
-  min-height: 260px;
+  min-height: 380px;
+  padding: 0;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.product-chip {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  margin-bottom: 24px;
-  background: radial-gradient(circle at 35% 25%, #fff4c8, #b68a46 36%, #6f6a63 72%, #c7cdd3);
-  border: 1px solid rgba(30, 32, 35, 0.18);
-  box-shadow: inset 0 2px 7px rgba(255, 255, 255, 0.55), 0 10px 24px rgba(31, 41, 51, 0.15);
+.product-thumb {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-bottom: 1px solid var(--line);
+  background: #f3f0ea;
 }
 
-.product-card:nth-child(2) .product-chip {
-  border-radius: 7px;
-  background: linear-gradient(135deg, #d7dee4, #737f8a 48%, #c9a05d);
+.product-card-body {
+  padding: 20px 24px 10px;
 }
 
-.product-card:nth-child(3) .product-chip {
-  background: radial-gradient(circle at 36% 30%, #f6d276, #916936 52%, #4e5359);
-}
-
-.product-card:nth-child(4) .product-chip {
-  border-radius: 12px;
-  background: linear-gradient(135deg, #f7f2e8, #bac2c8 50%, #8d969e);
-}
-
-.product-card:nth-child(5) .product-chip {
-  background: radial-gradient(circle at 40% 30%, #dfe5ea, #9fa9b2 38%, #5d6670 78%);
+.product-card .text-link {
+  padding: 0 24px 24px;
 }
 
 .card p,
