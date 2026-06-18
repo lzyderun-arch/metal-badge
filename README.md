@@ -1,17 +1,44 @@
-# Insignia Metálica
+﻿# BadgeCraft Metalworks Static Site
 
-Sitio estático en español para `https://insigniametalica.com`, orientado a compradores B2B de insignias metálicas personalizadas, pines metálicos, medallas, monedas, tokens y placas de nombre.
+Static independent site for custom metal crafts: custom metal badges, metal pins, custom metal coins, metal name tags, custom metal tokens and medals.
 
-## Despliegue en Cloudflare Pages
+## Local Preview
 
-- Framework preset: None
-- Build command: dejar vacío
-- Build output directory: `/`
-- Production branch: `main`
-- Dominio personalizado: `insigniametalica.com`
+```bash
+python -m http.server 4173 --bind 127.0.0.1
+```
 
-## SEO base
+Open:
 
-- Cada página tiene `title`, `meta description`, `canonical` y contenido HTML estático.
-- La navegación evita usar `insignia` sin contexto para no atraer búsquedas de Opel Insignia.
-- Las palabras clave principales se distribuyen por intención: insignias metálicas, pin metálico, pines metálicos personalizados, medallas metálicas, placas de identificación metálicas y monedas personalizadas.
+```text
+http://127.0.0.1:4173/
+```
+
+## Before Publishing
+
+Current live-site details already filled:
+
+- Brand: `BadgeCraft Metalworks`
+- Domain: `https://metal-badge.com/`
+- Email: `lzyderun@gmail.com`
+- WhatsApp: `+86 13922851014`
+
+Before final publishing, add company address, legal company name, privacy policy, and any real certificates or audit documents you want buyers to see.
+
+## Cloudflare Pages Free Deployment
+
+1. Create a GitHub repository and upload this folder.
+2. In Cloudflare, go to **Workers & Pages**.
+3. Choose **Create application** then **Pages**.
+4. Connect the GitHub repository.
+5. Use these build settings:
+   - Framework preset: `None`
+   - Build command: leave empty
+   - Build output directory: `/`
+6. Deploy.
+7. Add your custom domain in the Cloudflare Pages project.
+8. After the domain is live, submit `https://yourdomain.com/sitemap.xml` in Google Search Console.
+
+## SEO Structure
+
+See `docs/seo-page-plan.md` for keyword grouping and page planning based on the two Keyword Planner CSV files.

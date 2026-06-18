@@ -1,46 +1,50 @@
-# Plan SEO para insigniametalica.com
+﻿# SEO Page Plan
 
-## Hallazgos del CSV
+This static site targets overseas B2B buyers for custom metal crafts under `BadgeCraft Metalworks` at `https://metal-badge.com/`.
 
-El archivo `Keyword_Stats_2026-06-18_at_19_39_02.csv` tiene 1240 filas. La mayor parte del volumen bruto de `insignia` pertenece a búsquedas de autos Opel Insignia, por lo que no debe usarse como palabra clave principal sin calificadores.
+## Keyword Findings
 
-### Palabras útiles detectadas
+The two Google Keyword Planner exports include 1,615 rows. Many high-volume terms are not a fit for a custom metal craft site because they are about bullion prices, coin investment or marketplace brands. Those terms should not drive the main navigation.
 
-| Cluster | Palabras clave recomendadas | Página |
+Strong fit keywords:
+
+| Cluster | Priority keywords | Page |
 | --- | --- | --- |
-| Pines metálicos | pin metálico, pin metalico personalizado, pines metalicos personalizados, pins esmaltados personalizados, pin broche metalico, pin metalico para gorras, pin metalico con iman | `/products/metal-pins.html` |
-| Insignias metálicas | insignia metálica, insignias metálicas personalizadas, chapas metálicas personalizadas | `/products/metal-badges.html` |
-| Placas de nombre | placa de identificación metálica, placas de nombre metálicas, gafetes metálicos personalizados | `/products/metal-name-tags.html` |
-| Medallas y tokens | medalla metálica, medallas metálicas personalizadas, tokens metálicos, fichas metálicas | `/products/metal-tokens-medals.html` |
-| Monedas | monedas metálicas personalizadas, monedas conmemorativas, challenge coins | `/products/custom-metal-coins.html` |
+| Metal badges | metal badge, custom metal badges, personalized metal badges, metal badge logo, metal badges manufacturer | `/products/metal-badges.html` |
+| Metal pins | metal pin, metal lapel pins, custom metal pins, metal pin badges, custom metal pin badges | `/products/metal-pins.html` |
+| Metal coins | metal coin, custom metal coins, custom silver coins, metal token coins, custom metal tokens | `/products/custom-metal-coins.html` |
+| Name tags | metal name tags, metal name badges, engraved metal name tags, stainless steel name tags, brass name badges | `/products/metal-name-tags.html` |
+| Tokens and medals | custom metal tokens, metal token coins, medal pins, medallions | `/products/metal-tokens-medals.html` |
 
-### Palabras a evitar o limitar
+## Site Architecture
 
-- `insignia` sola, porque mezcla intención de producto con Opel Insignia.
-- Todas las combinaciones con `opel`, `cdti`, `opc`, `gsi`, `sport tourer`, años de coche, `coche`, `motor`, `segunda mano`.
-- Marcas ajenas o búsquedas de repuestos que no tienen intención de comprar productos metálicos personalizados.
+- `/` targets the broad supplier intent: custom metal badges, metal pins, custom metal coins.
+- Product pages each target one cluster and link back to the homepage and quote page.
+- Resource pages target educational long-tail traffic and support internal links to product pages.
+- `sitemap.xml` and `robots.txt` are ready for Cloudflare Pages.
 
-## Arquitectura
+## Content Expansion Roadmap
 
-- Inicio: intención general de fabricante de insignias metálicas personalizadas, pines, medallas, placas y monedas.
-- Productos: una intención principal por página para evitar canibalización.
-- Recursos: guías prácticas para consultas long-tail y apoyo de enlaces internos.
-- Contacto: conversión B2B con campos pensados para cotización.
+Add these pages after the initial site is live:
 
-## SEO title, meta description y H1
+1. `/resources/soft-enamel-vs-hard-enamel-pins.html`
+2. `/resources/metal-badge-backing-options.html`
+3. `/resources/custom-metal-coins-vs-metal-tokens.html`
+4. `/resources/how-to-prepare-artwork-for-metal-pins.html`
+5. `/resources/engraved-metal-name-tags-for-hotels.html`
 
-| Página | SEO title | H1 |
-| --- | --- | --- |
-| Inicio | Insignias metálicas personalizadas y pines metálicos | Insignias metálicas y pines personalizados para tu marca. |
-| Pines | Pin metálico personalizado y pines esmaltados | Pin metálico personalizado para solapas, gorras y merchandising |
-| Insignias | Insignias metálicas personalizadas para marcas y uniformes | Insignias metálicas personalizadas con acabado profesional |
-| Monedas | Monedas metálicas personalizadas y challenge coins | Monedas metálicas personalizadas con relieve 2D y 3D |
-| Placas | Placas de nombre metálicas y gafetes personalizados | Placas de nombre metálicas para hoteles, tiendas y equipos |
-| Medallas | Medallas metálicas, tokens y fichas personalizadas | Medallas metálicas y tokens personalizados para eventos |
+## On-Page SEO Rules Used
 
-## Reglas de redacción usadas
+- One primary keyword cluster per page.
+- Keyword appears in title, meta description, H1 or lead, and naturally in body copy.
+- Internal links connect guides to product pages and quote page.
+- Irrelevant high-volume bullion and price-search terms are excluded from primary pages.
+- Static HTML content is present in the source so search engines can crawl it without relying on JavaScript.
 
-- Español natural, con `pines metálicos` como forma principal y `pins` como variante de búsqueda.
-- Frases completas con material e intención: `insignias metálicas personalizadas`, no solo `insignia`.
-- CTA claro: cotización, presupuesto, cantidad, acabado, cierre y empaque.
-- Contenido rastreable sin depender de JavaScript.
+## Cloudflare Pages Settings
+
+- Framework preset: None
+- Build command: leave empty
+- Build output directory: `/`
+- Production branch: `main`
+- Custom domain: add your domain after the first deployment
