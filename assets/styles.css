@@ -534,6 +534,54 @@ section {
   font-size: 0.94rem;
 }
 
+.factory-showcase {
+  padding: 72px 0;
+  background: #f6f3ee;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.factory-showcase-inner {
+  width: min(1536px, calc(100% - 24px));
+  margin: 0 auto;
+}
+
+.factory-feature-stack {
+  display: grid;
+  gap: 24px;
+}
+
+.factory-feature {
+  overflow: hidden;
+  margin: 0;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 24px 54px rgba(35, 39, 45, 0.08);
+}
+
+.factory-feature img {
+  display: block;
+  width: 100%;
+  background: var(--white);
+}
+
+.factory-feature.overview img {
+  aspect-ratio: 3 / 2;
+  object-fit: contain;
+}
+
+.factory-feature.showroom img {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.factory-feature figcaption {
+  padding: 16px 20px 18px;
+  color: var(--muted);
+  font-size: 0.96rem;
+}
+
 .contact-list {
   display: grid;
   gap: 10px;
