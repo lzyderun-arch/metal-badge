@@ -34,7 +34,12 @@ a {
 
 img {
   max-width: 100%;
+  height: auto;
   display: block;
+}
+
+figure {
+  margin: 0;
 }
 
 .site-header {
@@ -147,10 +152,23 @@ img {
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(90deg, rgba(251, 250, 247, 0.97) 0%, rgba(251, 250, 247, 0.82) 42%, rgba(251, 250, 247, 0.2) 72%),
-    url("hero-metal-crafts.png") center right / cover no-repeat;
+  background: linear-gradient(90deg, rgba(251, 250, 247, 0.97) 0%, rgba(251, 250, 247, 0.82) 42%, rgba(251, 250, 247, 0.2) 72%);
+  z-index: -1;
+}
+
+.hero-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center right;
   z-index: -2;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
 }
 
 .hero::after {
@@ -370,6 +388,16 @@ section {
   color: #d5dbe1;
 }
 
+.band .card,
+.band .article-card {
+  color: var(--ink);
+}
+
+.band .card p,
+.band .article-card p {
+  color: var(--muted);
+}
+
 .keyword-table {
   width: 100%;
   border-collapse: collapse;
@@ -459,49 +487,19 @@ section {
 }
 
 .hero-panel {
-  min-height: 330px;
+  height: clamp(330px, 36vw, 500px);
+  margin: 0;
+  overflow: hidden;
   border-radius: 8px;
   border: 1px solid rgba(31, 41, 51, 0.18);
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.2)),
-    url("hero-metal-crafts.png") center / cover no-repeat;
+  background: #ece8df;
   box-shadow: 0 24px 60px rgba(31, 41, 51, 0.18);
 }
 
-.hero-panel.hero-badges {
-  background-image:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.36), rgba(255, 255, 255, 0.08)),
-    url("cases/metal-badge-case-2.png");
-}
-
-.hero-panel.hero-pins {
-  background-image:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.08)),
-    url("cases/metal-badge-case-1.png");
-}
-
-.hero-panel.hero-coins {
-  background-image:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.08)),
-    url("cases/metal-badge-case-3.png");
-}
-
-.hero-panel.hero-nametags {
-  background-image:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.1)),
-    url("cases/metal-badge-case-6.png");
-}
-
-.hero-panel.hero-tokens {
-  background-image:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.08)),
-    url("cases/metal-badge-case-4.png");
-}
-
-.hero-panel.hero-factory {
-  background-image:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.02)),
-    url("factory/metal-badge-factory-3.png");
+.hero-panel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .media-grid {
@@ -548,7 +546,7 @@ section {
 
 .factory-feature-stack {
   display: grid;
-  gap: 24px;
+  gap: 32px;
 }
 
 .factory-feature {
@@ -567,7 +565,7 @@ section {
 }
 
 .factory-feature.overview img {
-  aspect-ratio: 3 / 2;
+  aspect-ratio: auto;
   object-fit: contain;
 }
 
@@ -580,6 +578,100 @@ section {
   padding: 16px 20px 18px;
   color: var(--muted);
   font-size: 0.96rem;
+}
+
+.factory-feature.overview {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  border-left: 0;
+  border-right: 0;
+  border-radius: 0;
+}
+
+.factory-feature.overview figcaption {
+  width: min(var(--max), calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.factory-feature.showroom {
+  width: min(var(--max), calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.about-hero {
+  min-height: calc(100vh - 72px);
+  display: grid;
+  align-items: center;
+  padding: 64px 0;
+  background: linear-gradient(135deg, #f8f4eb, #e7e1d6);
+  border-bottom: 1px solid var(--line);
+}
+
+.about-hero-inner {
+  width: min(var(--max), calc(100% - 32px));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(360px, 0.78fr) minmax(560px, 1.22fr);
+  gap: 48px;
+  align-items: center;
+}
+
+.about-hero-copy {
+  max-width: 560px;
+}
+
+.about-hero h1 {
+  font-size: clamp(2.45rem, 4.1vw, 4.25rem);
+}
+
+.about-hero-image {
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid rgba(31, 41, 51, 0.18);
+  background: url("factory/metal-badge-factory-3.webp") center / cover no-repeat;
+  box-shadow: 0 28px 70px rgba(31, 41, 51, 0.2);
+}
+
+.about-hero-image img {
+  width: 100%;
+  height: clamp(430px, 52vh, 640px);
+  object-fit: cover;
+}
+
+.about-factory-showcase .factory-showcase-inner {
+  width: min(var(--max), calc(100% - 32px));
+}
+
+.about-factory-grid {
+  grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.55fr);
+  align-items: start;
+}
+
+.about-factory-showcase .factory-feature {
+  width: auto;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.about-factory-showcase .factory-feature.overview {
+  border-left: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+}
+
+.about-factory-showcase .factory-feature.overview figcaption {
+  width: auto;
+  margin: 0;
+}
+
+.about-factory-showcase .factory-feature.showroom img {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.about-factory-showcase .factory-feature.overview img {
+  aspect-ratio: 3 / 2;
+  object-fit: contain;
 }
 
 .contact-list {
@@ -614,6 +706,20 @@ section {
 
 .article-inner h1 {
   font-size: clamp(2.2rem, 5vw, 4rem);
+}
+
+.article-hero-media {
+  margin: 34px 0 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 18px 42px rgba(35, 39, 45, 0.1);
+}
+
+.article-hero-media img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
 }
 
 .article-body {
@@ -674,8 +780,23 @@ section {
 
   .split,
   .product-hero-inner,
+  .about-hero-inner,
+  .about-factory-grid,
   .contact-grid {
     grid-template-columns: 1fr;
+  }
+
+  .about-hero {
+    min-height: auto;
+  }
+
+  .about-hero-copy {
+    max-width: 720px;
+  }
+
+  .about-hero-image img {
+    height: auto;
+    aspect-ratio: 16 / 9;
   }
 
   .section-head,
@@ -718,9 +839,11 @@ section {
   }
 
   .hero::before {
-    background:
-      linear-gradient(180deg, rgba(251, 250, 247, 0.98) 0%, rgba(251, 250, 247, 0.84) 46%, rgba(251, 250, 247, 0.25) 72%),
-      url("hero-metal-crafts.png") center bottom / cover no-repeat;
+    background: linear-gradient(180deg, rgba(251, 250, 247, 0.98) 0%, rgba(251, 250, 247, 0.84) 46%, rgba(251, 250, 247, 0.25) 72%);
+  }
+
+  .hero-media {
+    object-position: center bottom;
   }
 
   .hero-copy {
