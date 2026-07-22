@@ -687,6 +687,15 @@ section {
   margin-bottom: 16px;
 }
 
+.article-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin: -5px 0 14px;
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
 .spec-list {
   display: grid;
   gap: 10px;
