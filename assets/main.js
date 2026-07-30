@@ -13,6 +13,19 @@ document.querySelectorAll("[data-year]").forEach((node) => {
 });
 
 const QUOTE_PENDING_KEY = "badgecraft_quote_pending";
+const SALES_WHATSAPP_NUMBER = "8613922851014";
+const SALES_EMAIL = "lzyderun@gmail.com";
+
+function buildWhatsAppUrl(source) {
+  const message = [
+    "Hello, I would like a quote for custom metal products.",
+    `Page: ${document.title}`,
+    `URL: ${window.location.href}`,
+    `Source: ${source}`,
+  ].join("\n");
+
+  return `https://wa.me/${SALES_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+}
 
 function sendAnalyticsEvent(eventName, parameters = {}) {
   if (typeof window.gtag !== "function") {
@@ -34,6 +47,57 @@ function cleanText(element) {
     .replace(/\s+/g, " ")
     .slice(0, 100);
 }
+
+function addHeaderContactLinks() {
+  const header = document.querySelector(".site-header");
+
+  if (!header || header.querySelector(".header-contact-bar")) {
+    return;
+  }
+
+  const contactBar = document.createElement("div");
+  contactBar.className = "header-contact-bar";
+  contactBar.innerHTML = `
+    <div class="header-contact-inner">
+      <a href="${buildWhatsAppUrl("header_contact")}" target="_blank" rel="noopener">WhatsApp: +86 13922851014</a>
+      <a href="mailto:${SALES_EMAIL}">Email: ${SALES_EMAIL}</a>
+    </div>
+  `;
+  header.insertBefore(contactBar, header.firstChild);
+}
+
+function addWhatsAppConversionLinks() {
+  if (document.querySelector(".whatsapp-float")) {
+    return;
+  }
+
+  const floatingLink = document.createElement("a");
+  floatingLink.className = "whatsapp-float";
+  floatingLink.href = buildWhatsAppUrl("floating_button");
+  floatingLink.target = "_blank";
+  floatingLink.rel = "noopener";
+  floatingLink.setAttribute("aria-label", "Contact BadgeCraft Metalworks on WhatsApp");
+  floatingLink.textContent = "WhatsApp";
+  document.body.appendChild(floatingLink);
+
+  const isProductPage = window.location.pathname.replace(/\/$/, "").startsWith("/products/");
+  const heroActions = document.querySelector(".product-hero .hero-actions");
+
+  if (!isProductPage || !heroActions || heroActions.querySelector('a[href*="wa.me"]')) {
+    return;
+  }
+
+  const heroWhatsAppLink = document.createElement("a");
+  heroWhatsAppLink.className = "btn whatsapp";
+  heroWhatsAppLink.href = buildWhatsAppUrl("product_hero");
+  heroWhatsAppLink.target = "_blank";
+  heroWhatsAppLink.rel = "noopener";
+  heroWhatsAppLink.textContent = "Contact on WhatsApp";
+  heroActions.appendChild(heroWhatsAppLink);
+}
+
+addHeaderContactLinks();
+addWhatsAppConversionLinks();
 
 document.addEventListener("click", (event) => {
   const link = event.target.closest("a[href]");
