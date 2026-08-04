@@ -1,4 +1,4 @@
-﻿const toggle = document.querySelector(".nav-toggle");
+const toggle = document.querySelector(".nav-toggle");
 const links = document.querySelector(".nav-links");
 
 if (toggle && links) {
@@ -67,18 +67,16 @@ function addHeaderContactLinks() {
 }
 
 function addWhatsAppConversionLinks() {
-  if (document.querySelector(".whatsapp-float")) {
-    return;
+  if (!document.querySelector(".whatsapp-float")) {
+    const floatingLink = document.createElement("a");
+    floatingLink.className = "whatsapp-float";
+    floatingLink.href = buildWhatsAppUrl("floating_button");
+    floatingLink.target = "_blank";
+    floatingLink.rel = "noopener";
+    floatingLink.setAttribute("aria-label", "Contact BadgeCraft Metalworks on WhatsApp");
+    floatingLink.textContent = "WhatsApp";
+    document.body.appendChild(floatingLink);
   }
-
-  const floatingLink = document.createElement("a");
-  floatingLink.className = "whatsapp-float";
-  floatingLink.href = buildWhatsAppUrl("floating_button");
-  floatingLink.target = "_blank";
-  floatingLink.rel = "noopener";
-  floatingLink.setAttribute("aria-label", "Contact BadgeCraft Metalworks on WhatsApp");
-  floatingLink.textContent = "WhatsApp";
-  document.body.appendChild(floatingLink);
 
   const isProductPage = window.location.pathname.replace(/\/$/, "").startsWith("/products/");
   const heroActions = document.querySelector(".product-hero .hero-actions");
