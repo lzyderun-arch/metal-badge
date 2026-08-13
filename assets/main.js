@@ -13,8 +13,8 @@ document.querySelectorAll("[data-year]").forEach((node) => {
 });
 
 const QUOTE_PENDING_KEY = "badgecraft_quote_pending";
-const SALES_WHATSAPP_NUMBER = "8613922851014";
-const SALES_EMAIL = "lzyderun@gmail.com";
+const SALES_WHATSAPP_NUMBER = "8619520704162";
+const SALES_EMAIL = "chloe@aotomi.cn";
 
 function buildWhatsAppUrl(source) {
   const message = [
@@ -59,7 +59,7 @@ function addHeaderContactLinks() {
   contactBar.className = "header-contact-bar";
   contactBar.innerHTML = `
     <div class="header-contact-inner">
-      <a href="${buildWhatsAppUrl("header_contact")}" target="_blank" rel="noopener">WhatsApp: +86 13922851014</a>
+      <a href="${buildWhatsAppUrl("header_contact")}" target="_blank" rel="noopener">WhatsApp: +86 19520704162</a>
       <a href="mailto:${SALES_EMAIL}">Email: ${SALES_EMAIL}</a>
     </div>
   `;
