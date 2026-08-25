@@ -14,7 +14,7 @@ document.querySelectorAll("[data-year]").forEach((node) => {
 
 const QUOTE_PENDING_KEY = "badgecraft_quote_pending";
 const SALES_WHATSAPP_NUMBER = "8619520704162";
-const SALES_EMAIL = "chloe@aotomi.cn";
+const SALES_EMAIL = "appleliao2022@gmail.com";
 
 function buildWhatsAppUrl(source) {
   const message = [
