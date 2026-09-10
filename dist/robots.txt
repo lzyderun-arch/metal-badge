@@ -1,0 +1,5 @@
+﻿User-agent: *
+Allow: /
+
+Sitemap: https://metal-badge.com/sitemap.xml
+Sitemap: https://metal-badge.com/image-sitemap.xml
