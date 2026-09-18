@@ -193,3 +193,126 @@ if (window.location.pathname.replace(/\/$/, "") === "/thanks") {
     window.sessionStorage.removeItem(QUOTE_PENDING_KEY);
   }
 }
+
+function initBadgeConfigurator() {
+  const form = document.querySelector("#badge-configurator");
+  if (!form) return;
+
+  const get = (id) => document.getElementById(id);
+  const selected = (name) => form.querySelector(`input[name="${name}"]:checked`);
+  const selectedLabel = (name) => {
+    const field = form.querySelector(`[name="${name}"]`);
+    if (field?.tagName === "SELECT") return field.options[field.selectedIndex]?.textContent || "Not selected";
+    return selected(name)?.dataset.label || "Not selected";
+  };
+  const safeNumber = (id, fallback) => {
+    const value = Number(get(id)?.value);
+    return Number.isFinite(value) ? value : fallback;
+  };
+
+  const finishColors = {
+    "bright-silver": "#cbd0d6",
+    "antique-gold": "#b68a46",
+    "antique-silver": "#8b9198",
+    "black-nickel": "#454b54",
+    "brushed-metal": "#a9afb4",
+  };
+  const enamelColors = {
+    none: "#56616b",
+    "soft-enamel": "#234d79",
+    "hard-enamel": "#9c302b",
+    "printed-color": "#b56d24",
+  };
+  const baseByMaterial = { zinc: 1.95, brass: 1.65, iron: 1.45, stainless: 1.75 };
+  const finishAdd = { "bright-silver": .1, "antique-gold": .18, "antique-silver": .14, "black-nickel": .2, "brushed-metal": .16 };
+  const enamelAdd = { none: 0, "soft-enamel": .35, "hard-enamel": .55, "printed-color": .4 };
+  const backingAdd = { "butterfly-clutch": .12, magnetic: .4, "safety-pin": .18, "screw-post": .25, adhesive: .1 };
+  const packagingAdd = { "bulk-carton": 0, "individual-bag": .12, "backing-card": .28, "gift-box": .65 };
+
+  const summaryText = () => {
+    const artwork = get("badge-artwork")?.files?.[0]?.name || "Not attached";
+    return [
+      "Hello, I would like a quote for a custom metal badge.",
+      `Application: ${selectedLabel("application")}`,
+      `Size: ${safeNumber("badge-width", 1.5).toFixed(2)} x ${safeNumber("badge-height", 1.25).toFixed(2)} in`,
+      `Quantity: ${Math.max(100, Math.round(safeNumber("badge-quantity", 100)))} pcs`,
+      `Material: ${selectedLabel("material")}`,
+      `Finish: ${selectedLabel("finish")}`,
+      `Enamel: ${selectedLabel("enamel")}`,
+      `Backing: ${selectedLabel("backing")}`,
+      `Shape: ${selectedLabel("shape")}`,
+      `Back: ${selectedLabel("back")}`,
+      `Packaging: ${selectedLabel("packaging")}`,
+      `Line 1: ${get("badge-line-1")?.value.trim() || "None"}`,
+      `Line 2: ${get("badge-line-2")?.value.trim() || "None"}`,
+      `Artwork: ${artwork}`,
+      `Instructions: ${get("badge-instructions")?.value.trim() || "None"}`,
+      "Page: https://metal-badge.com/design-custom-badge",
+    ].join("\n");
+  };
+
+  function update() {
+    const material = selected("material")?.value || "zinc";
+    const finish = selected("finish")?.value || "bright-silver";
+    const enamel = selected("enamel")?.value || "none";
+    const backing = selected("backing")?.value || "butterfly-clutch";
+    const shape = selected("shape")?.value || "custom-silhouette";
+    const back = selected("back")?.value || "shell";
+    const packaging = selected("packaging")?.value || "bulk-carton";
+    const quantity = Math.max(100, Math.round(safeNumber("badge-quantity", 100)));
+    const width = safeNumber("badge-width", 1.5);
+    const height = safeNumber("badge-height", 1.25);
+    const line1 = get("badge-line-1")?.value.trim() || "YOUR BADGE";
+    const line2 = get("badge-line-2")?.value.trim() || "";
+    const preview = get("badge-preview");
+    if (preview) {
+      preview.style.setProperty("--badge-metal", finishColors[finish] || finishColors["bright-silver"]);
+      preview.style.setProperty("--badge-enamel", enamelColors[enamel] || enamelColors.none);
+    }
+    if (get("preview-line-1")) get("preview-line-1").textContent = line1;
+    if (get("preview-line-2")) get("preview-line-2").textContent = line2;
+    const setText = (id, textValue) => { if (get(id)) get(id).textContent = textValue; };
+    setText("summary-application", selectedLabel("application"));
+    setText("summary-size", `${width.toFixed(2)} × ${height.toFixed(2)} in`);
+    setText("summary-quantity", `${quantity.toLocaleString()} pcs`);
+    setText("summary-material", selectedLabel("material"));
+    setText("summary-finish", selectedLabel("finish"));
+    setText("summary-enamel", selectedLabel("enamel"));
+    setText("summary-backing", selectedLabel("backing"));
+    setText("summary-shape", `${selectedLabel("shape")} / ${selectedLabel("back")}`);
+    setText("summary-packaging", selectedLabel("packaging"));
+    const pieceBase = (baseByMaterial[material] || 1.95) + (finishAdd[finish] || 0) + (enamelAdd[enamel] || 0) + (backingAdd[backing] || 0) + (packagingAdd[packaging] || 0);
+    const sizeFactor = Math.max(.82, Math.min(2.4, (width * height) / 1.875));
+    const volumeFactor = quantity >= 1000 ? .85 : quantity >= 500 ? .92 : 1;
+    const tooling = 65 + (shape === "custom-silhouette" ? 25 : 0) + (back === "solid" ? 13 : 0);
+    const low = Math.round(tooling + quantity * pieceBase * sizeFactor * volumeFactor * .85);
+    const high = Math.round(tooling + quantity * pieceBase * sizeFactor * volumeFactor * 1.15);
+    setText("estimate-range", `USD $${low.toLocaleString()}–$${high.toLocaleString()}`);
+    const whatsapp = get("badge-whatsapp");
+    if (whatsapp) whatsapp.href = `https://wa.me/8619520704162?text=${encodeURIComponent(summaryText())}`;
+    const artwork = get("badge-artwork")?.files?.[0]?.name;
+    setText("artwork-name", artwork ? `Selected file: ${artwork}` : "Attach a logo, sketch or reference image when available.");
+  }
+
+  form.querySelectorAll("input, select, textarea").forEach((field) => {
+    field.addEventListener("input", update);
+    field.addEventListener("change", update);
+  });
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const whatsapp = get("badge-whatsapp");
+    if (whatsapp) window.open(whatsapp.href, "_blank", "noopener");
+  });
+  get("badge-copy")?.addEventListener("click", async () => {
+    const status = get("badge-copy-status");
+    try {
+      await navigator.clipboard.writeText(summaryText());
+      if (status) status.textContent = "Specification copied. Paste it into email or WhatsApp.";
+    } catch {
+      if (status) status.textContent = "Copy was blocked by the browser. Use the WhatsApp button instead.";
+    }
+  });
+  update();
+}
+
+initBadgeConfigurator();
