@@ -13,8 +13,8 @@ document.querySelectorAll("[data-year]").forEach((node) => {
 });
 
 const QUOTE_PENDING_KEY = "badgecraft_quote_pending";
-const SALES_WHATSAPP_NUMBER = "8619520704162";
-const SALES_EMAIL = "appleliao2022@gmail.com";
+const SALES_WHATSAPP_NUMBER = "8613922851014";
+const SALES_EMAIL = "lzyderun@gmail.com";
 
 function buildWhatsAppUrl(source) {
   const message = [
@@ -59,7 +59,7 @@ function addHeaderContactLinks() {
   contactBar.className = "header-contact-bar";
   contactBar.innerHTML = `
     <div class="header-contact-inner">
-      <a href="${buildWhatsAppUrl("header_contact")}" target="_blank" rel="noopener">WhatsApp: +86 19520704162</a>
+      <a href="${buildWhatsAppUrl("header_contact")}" target="_blank" rel="noopener">WhatsApp: +86 13922851014</a>
       <a href="mailto:${SALES_EMAIL}">Email: ${SALES_EMAIL}</a>
     </div>
   `;
@@ -289,7 +289,7 @@ function initBadgeConfigurator() {
     const high = Math.round(tooling + quantity * pieceBase * sizeFactor * volumeFactor * 1.15);
     setText("estimate-range", `USD $${low.toLocaleString()}–$${high.toLocaleString()}`);
     const whatsapp = get("badge-whatsapp");
-    if (whatsapp) whatsapp.href = `https://wa.me/8619520704162?text=${encodeURIComponent(summaryText())}`;
+    if (whatsapp) whatsapp.href = `https://wa.me/8613922851014?text=${encodeURIComponent(summaryText())}`;
     const artwork = get("badge-artwork")?.files?.[0]?.name;
     setText("artwork-name", artwork ? `Selected file: ${artwork}` : "Attach a logo, sketch or reference image when available.");
   }
@@ -316,3 +316,4 @@ function initBadgeConfigurator() {
 }
 
 initBadgeConfigurator();
+
